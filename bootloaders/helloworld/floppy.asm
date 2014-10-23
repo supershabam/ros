@@ -1,15 +1,17 @@
-         org 7C00h
+	;; graciously taken from http://en.wikibooks.org/wiki/X86_Assembly/Bootloaders
 
-	         jmp short Start ;Jump over the data (the 'short' keyword makes the jmp instruction smaller)
+	org 7C00h
 
-Msg:	    db "Hello World! "
+	jmp short Start ;Jump over the data (the 'short' keyword makes the jmp instruction smaller)
+
+Msg:	db "What is real life? "
 EndMsg:
 
-Start:	  mov bx, 000Fh   	;Page 0, colour attribute 15 (white) for the int 10 calls below
-	         mov cx, 1	;We will want to write 1 character
-	         xor dx, dx	;Start at top left corner
-	         mov ds, dx	;Ensure ds = 0 (to let us load the message)
-	         cld		;Ensure direction flag is cleared (for LODSB)
+Start:	mov bx, 000Fh   	;Page 0, colour attribute 15 (white) for the int 10 calls below
+	mov cx, 1	;We will want to write 1 character
+	xor dx, dx	;Start at top left corner
+	mov ds, dx	;Ensure ds = 0 (to let us load the message)
+	cld		;Ensure direction flag is cleared (for LODSB)
 
 Print:	  mov si, Msg     	;Loads the address of the first byte of the message, 7C02h in this case
 
