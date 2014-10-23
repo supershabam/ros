@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -eo pipefail
+
+main() {
+    local port=5901
+    local resolved_port=$((port-5900))
+    
+    echo "connect at vnc://:$port"
+    echo "resolved: $resolved_port"
+    qemu-system-x86_64 -vnc :$resolved_port floppy.img
+}
+main
